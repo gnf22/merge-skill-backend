@@ -24,7 +24,7 @@ export class CreateApplicantController {
       password,
       biography,
       telephone,
-      dateOfBirth,
+      dateOfBirth: new Date(dateOfBirth),
       schooling,
       isWorking,
     });
