@@ -9,5 +9,5 @@ export interface ICreateApplicantDTO {
   dateOfBirth: Date;
   schooling: SchoolingRole;
   isWorking: boolean;
-  user_id: string;
+  user_id?: string;
 }

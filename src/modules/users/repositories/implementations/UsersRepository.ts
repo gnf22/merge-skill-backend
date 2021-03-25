@@ -15,7 +15,7 @@ export class UsersRepository implements IUsersRepository {
     email,
     password,
     isEnterprise,
-  }: ICreateUserDTO): Promise<void> {
+  }: ICreateUserDTO): Promise<User> {
     const user = this.repository.create({
       email,
       password,
@@ -23,5 +23,7 @@ export class UsersRepository implements IUsersRepository {
     });
 
     await this.repository.save(user);
+
+    return user;
   }
 }

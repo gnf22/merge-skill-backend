@@ -24,9 +24,8 @@ export class CreateApplicantUseCase {
     dateOfBirth,
     schooling,
     isWorking,
-    user_id,
   }: ICreateApplicantDTO): Promise<void> {
-    await this.usersRepository.create({
+    const user = await this.usersRepository.create({
       email,
       password,
       isEnterprise: false,
@@ -39,7 +38,7 @@ export class CreateApplicantUseCase {
       dateOfBirth,
       schooling,
       isWorking,
-      user_id,
+      user_id: user.id,
     });
   }
 }
