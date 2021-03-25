@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateApplicants1616645929637 implements MigrationInterface {
+export class CreateEnterprise1616690323859 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'applicants',
+        name: 'enterprises',
         columns: [
           {
             name: 'id',
@@ -16,7 +16,7 @@ export class CreateApplicants1616645929637 implements MigrationInterface {
             type: 'varchar',
           },
           {
-            name: 'biography',
+            name: 'description',
             type: 'varchar',
           },
           {
@@ -24,37 +24,33 @@ export class CreateApplicants1616645929637 implements MigrationInterface {
             type: 'varchar',
           },
           {
-            name: 'dateOfBirth',
-            type: 'timestamp',
+            name: 'address',
+            type: 'varchar',
           },
           {
-            name: 'schooling',
-            type: 'enum',
-            enum: ['Fundamental', 'Médio', 'Superior'],
-            enumName: 'schoolingEnum',
+            name: 'number',
+            type: 'integer',
           },
           {
-            name: 'isWorking',
-            type: 'boolean',
+            name: 'city',
+            type: 'varchar',
+          },
+          {
+            name: 'state',
+            type: 'varchar',
+          },
+          {
+            name: 'postalCode',
+            type: 'varchar',
           },
           {
             name: 'user_id',
             type: 'uuid',
           },
-          {
-            name: 'created_at',
-            type: 'timestamp',
-            default: 'now()',
-          },
-          {
-            name: 'updated_at',
-            type: 'timestamp',
-            default: 'now()',
-          },
         ],
         foreignKeys: [
           {
-            name: 'ApplicantUser',
+            name: 'EnterpriseUser',
             columnNames: ['user_id'],
             referencedTableName: 'users',
             referencedColumnNames: ['id'],
@@ -67,6 +63,6 @@ export class CreateApplicants1616645929637 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('applicants');
+    await queryRunner.dropTable('enterprises');
   }
 }
