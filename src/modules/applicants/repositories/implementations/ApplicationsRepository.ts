@@ -4,7 +4,7 @@ import { ICreateApplicantDTO } from '../../dtos/ICreateApplicantDTO';
 import { Applicant } from '../../entities/Applicant';
 import { IApplicantsRepository } from '../IApplicantsRepository';
 
-export class ApplicationsRepository implements IApplicantsRepository {
+export class ApplicantsRepository implements IApplicantsRepository {
   private repository: Repository<Applicant>;
 
   constructor() {
