@@ -25,6 +25,12 @@ export class CreateApplicantUseCase {
     schooling,
     isWorking,
   }: ICreateApplicantDTO): Promise<void> {
+    const userAlreadyExists = await this.usersRepository.findByEmail(email);
+
+    if (userAlreadyExists) {
+      throw new Error('User already exists!');
+    }
+
     const user = await this.usersRepository.create({
       email,
       password,
