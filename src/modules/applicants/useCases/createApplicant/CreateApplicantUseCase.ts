@@ -1,5 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 
+import { AppError } from '../../../../errors/AppError';
 import { IUsersRepository } from '../../../users/repositories/IUsersRepository';
 import { ICreateApplicantDTO } from '../../dtos/ICreateApplicantDTO';
 import { IApplicantsRepository } from '../../repositories/IApplicantsRepository';
@@ -28,7 +29,7 @@ export class CreateApplicantUseCase {
     const userAlreadyExists = await this.usersRepository.findByEmail(email);
 
     if (userAlreadyExists) {
-      throw new Error('User already exists!');
+      throw new AppError('User already exists!');
     }
 
     const user = await this.usersRepository.create({
