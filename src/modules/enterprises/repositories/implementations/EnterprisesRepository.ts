@@ -34,6 +34,8 @@ export class EnterprisesRepository implements IEnterprisesRepository {
       user_id,
     });
 
+    console.log(enterprise);
+
     await this.repository.save(enterprise);
   }
 }

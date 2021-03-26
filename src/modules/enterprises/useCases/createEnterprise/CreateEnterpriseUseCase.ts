@@ -36,6 +36,12 @@ export class CreateEnterpriseUseCase {
     number,
     postalCode,
   }: IRequest): Promise<void> {
+    const userAlreadyExists = await this.usersRepository.findByEmail(email);
+
+    if (userAlreadyExists) {
+      throw new AppError('User already exists!');
+    }
+
     const viaCep = new ViaCEP(axios);
 
     if (postalCode.length !== 8) {

@@ -4,7 +4,7 @@ import {
   Entity,
   JoinColumn,
   OneToOne,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
@@ -13,7 +13,7 @@ import { User } from '../../users/entities/User';
 
 @Entity('enterprises')
 export class Enterprise {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   id: string;
 
   @Column()
