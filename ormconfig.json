@@ -1,10 +1,10 @@
 {
   "type": "postgres",
   "port": 5432,
-  "host": "database_merge",
+  "host": "localhost",
   "username": "docker",
-  "password": "merge",
-  "database": "merge_skill",
+  "password": "docker",
+  "database": "merge-skill",
   "migrations": [
     "./src/database/migrations/*.ts"
   ],
