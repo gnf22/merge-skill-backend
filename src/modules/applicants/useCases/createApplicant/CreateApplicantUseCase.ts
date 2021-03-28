@@ -32,13 +32,13 @@ export class CreateApplicantUseCase {
       throw new AppError('User already exists!');
     }
 
-    const user = await this.usersRepository.create({
+    const user = this.usersRepository.create({
       email,
       password,
       isEnterprise: false,
     });
 
-    await this.applicantsRepository.create({
+    const applicant = this.applicantsRepository.create({
       name,
       biography,
       telephone,
@@ -47,5 +47,7 @@ export class CreateApplicantUseCase {
       isWorking,
       user_id: user.id,
     });
+
+    await this.applicantsRepository.save(user, applicant);
   }
 }

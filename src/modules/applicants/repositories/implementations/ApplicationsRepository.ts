@@ -1,17 +1,18 @@
-import { getRepository, Repository } from 'typeorm';
+import { getRepository, Repository, getManager } from 'typeorm';
 
+import { User } from '../../../users/entities/User';
 import { ICreateApplicantDTO } from '../../dtos/ICreateApplicantDTO';
 import { Applicant } from '../../entities/Applicant';
 import { IApplicantsRepository } from '../IApplicantsRepository';
 
 export class ApplicantsRepository implements IApplicantsRepository {
-  private repository: Repository<Applicant>;
+  protected repository: Repository<Applicant>;
 
   constructor() {
     this.repository = getRepository(Applicant);
   }
 
-  async create({
+  create({
     name,
     biography,
     telephone,
@@ -19,7 +20,7 @@ export class ApplicantsRepository implements IApplicantsRepository {
     schooling,
     isWorking,
     user_id,
-  }: ICreateApplicantDTO): Promise<void> {
+  }: ICreateApplicantDTO): Applicant {
     const applicant = this.repository.create({
       name,
       biography,
@@ -30,6 +31,13 @@ export class ApplicantsRepository implements IApplicantsRepository {
       user_id,
     });
 
-    await this.repository.save(applicant);
+    return applicant;
+  }
+
+  async save(user: User, applicant: Applicant): Promise<void> {
+    await getManager().transaction(async entityManager => {
+      await entityManager.save(user);
+      await entityManager.save(applicant);
+    });
   }
 }
